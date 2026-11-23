@@ -5,7 +5,7 @@ const videos = [
         sport: "Futebol",
         duration: "8:24",
         views: "2,3 mi",
-        image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=800&q=80",
+        image: "https://img.youtube.com/vi/sQQSpsYtjVw/hqdefault.jpg",
         youtube: "https://youtu.be/sQQSpsYtjVw?si=Rxer7rRgP1ADqEmX",
         videoId: "sQQSpsYtjVw"
     },
@@ -15,8 +15,8 @@ const videos = [
         sport: "Basquete",
         duration: "10:12",
         views: "1,8 mi",
-        image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://youtu.be/rOSyIi0f0NQ?si=9zot4jh8j6gZRiHO",
+        image: "https://img.youtube.com/vi/rOSyIi0f0NQ/hqdefault.jpg",
+        youtube: "https://youtu.be/rOSyIi0f0NQ?si=9zot4jh8j6gZRiH",
         videoId: "rOSyIi0f0NQ"
     },
     {
@@ -25,8 +25,8 @@ const videos = [
         sport: "Vôlei",
         duration: "9:45",
         views: "1,2 mi",
-        image: "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://youtu.be/aQ_ZE7ogHOY?si=JEX-fNMqizj82zh5",
+        image: "https://img.youtube.com/vi/aQ_ZE7ogHOY/hqdefault.jpg",
+        youtube: "https://youtu.be/aQ_ZE7ogHOY?si=JEX-fNMqizj82zh",
         videoId: "aQ_ZE7ogHOY"
     },
     {
@@ -35,8 +35,8 @@ const videos = [
         sport: "Tênis",
         duration: "7:36",
         views: "980 mil",
-        image: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://youtu.be/YiWjCKWBWog?si=mT8ZHwd1eTLBSpRF",
+        image: "https://img.youtube.com/vi/YiWjCKWBWog/hqdefault.jpg",
+        youtube: "https://youtu.be/YiWjCKWBWog?si=mT8ZHwd1eTLBSpR",
         videoId: "YiWjCKWBWog"
     },
     {
@@ -45,8 +45,8 @@ const videos = [
         sport: "Corrida",
         duration: "6:42",
         views: "750 mil",
-        image: "https://images.unsplash.com/photo-1533561052604-c3beb6d55b8d?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://youtu.be/Nleku8x8CfM?si=BhIgZeIyoOx3xEsn",
+        image: "https://img.youtube.com/vi/Nleku8x8CfM/hqdefault.jpg",
+        youtube: "https://youtu.be/Nleku8x8CfM?si=BhIgZeIyoOx3xEs",
         videoId: "Nleku8x8CfM"
     },
     {
@@ -55,8 +55,8 @@ const videos = [
         sport: "Futebol",
         duration: "5:28",
         views: "640 mil",
-        image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://youtu.be/TTTr3cDZO3M?si=9jXIexO1cIZJg2QF",
+        image: "https://img.youtube.com/vi/TTTr3cDZO3M/hqdefault.jpg",
+        youtube: "https://youtu.be/TTTr3cDZO3M?si=9jXIexO1cIZJg2Q",
         videoId: "TTTr3cDZO3M"
     },
     {
@@ -65,8 +65,8 @@ const videos = [
         sport: "Basquete",
         duration: "8:16",
         views: "510 mil",
-        image: "https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://youtu.be/15jB450S3HY?si=QgpgOXOC75p3BQOk",
+        image: "https://img.youtube.com/vi/15jB450S3HY/hqdefault.jpg",
+        youtube: "https://youtu.be/15jB450S3HY?si=QgpgOXOC75p3BQO",
         videoId: "15jB450S3HY"
     },
     {
@@ -75,8 +75,8 @@ const videos = [
         sport: "Vôlei",
         duration: "6:53",
         views: "430 mil",
-        image: "https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://youtu.be/1pbaugNB3Z4?si=Q9TrIe8dtGZ1X2uC",
+        image: "https://img.youtube.com/vi/1pbaugNB3Z4/hqdefault.jpg",
+        youtube: "https://youtu.be/1pbaugNB3Z4?si=Q9TrIe8dtGZ1X2u",
         videoId: "1pbaugNB3Z4"
     }
 ];
