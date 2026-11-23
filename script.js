@@ -1,378 +1,458 @@
+/* =========================================
+   SPORTVISION — SCRIPT.JS
+   Vídeos, pesquisa, categorias, favoritos,
+   histórico, player e perfil.
+========================================= */
+
+// =========================================
+// 1. VÍDEOS DO SITE
+// =========================================
+
 const videos = [
-    {
-        id: 1,
-        title: "Melhores momentos do futebol mundial",
-        sport: "Futebol",
-        duration: "8:24",
-        views: "2,3 mi",
-        image: "https://img.youtube.com/vi/sQQSpsYtjVw/hqdefault.jpg",
-        youtube: "https://youtu.be/sQQSpsYtjVw?si=Rxer7rRgP1ADqEmX",
-        videoId: "sQQSpsYtjVw"
-    },
-    {
-        id: 2,
-        title: "As jogadas mais incríveis do basquete",
-        sport: "Basquete",
-        duration: "10:12",
-        views: "1,8 mi",
-        image: "https://img.youtube.com/vi/rOSyIi0f0NQ/hqdefault.jpg",
-        youtube: "https://youtu.be/rOSyIi0f0NQ?si=9zot4jh8j6gZRiH",
-        videoId: "rOSyIi0f0NQ"
-    },
-    {
-        id: 3,
-        title: "Grandes jogadas do vôlei",
-        sport: "Vôlei",
-        duration: "9:45",
-        views: "1,2 mi",
-        image: "https://img.youtube.com/vi/aQ_ZE7ogHOY/hqdefault.jpg",
-        youtube: "https://youtu.be/aQ_ZE7ogHOY?si=JEX-fNMqizj82zh",
-        videoId: "aQ_ZE7ogHOY"
-    },
-    {
-        id: 4,
-        title: "Os melhores pontos do tênis",
-        sport: "Tênis",
-        duration: "7:36",
-        views: "980 mil",
-        image: "https://img.youtube.com/vi/YiWjCKWBWog/hqdefault.jpg",
-        youtube: "https://youtu.be/YiWjCKWBWog?si=mT8ZHwd1eTLBSpR",
-        videoId: "YiWjCKWBWog"
-    },
-    {
-        id: 5,
-        title: "Velocidade e superação nas pistas",
-        sport: "Corrida",
-        duration: "6:42",
-        views: "750 mil",
-        image: "https://img.youtube.com/vi/Nleku8x8CfM/hqdefault.jpg",
-        youtube: "https://youtu.be/Nleku8x8CfM?si=BhIgZeIyoOx3xEs",
-        videoId: "Nleku8x8CfM"
-    },
-    {
-        id: 6,
-        title: "Dribles e gols inesquecíveis",
-        sport: "Futebol",
-        duration: "5:28",
-        views: "640 mil",
-        image: "https://img.youtube.com/vi/TTTr3cDZO3M/hqdefault.jpg",
-        youtube: "https://youtu.be/TTTr3cDZO3M?si=9jXIexO1cIZJg2Q",
-        videoId: "TTTr3cDZO3M"
-    },
-    {
-        id: 7,
-        title: "Enterradas espetaculares",
-        sport: "Basquete",
-        duration: "8:16",
-        views: "510 mil",
-        image: "https://img.youtube.com/vi/15jB450S3HY/hqdefault.jpg",
-        youtube: "https://youtu.be/15jB450S3HY?si=QgpgOXOC75p3BQO",
-        videoId: "15jB450S3HY"
-    },
-    {
-        id: 8,
-        title: "Ralis impressionantes no vôlei",
-        sport: "Vôlei",
-        duration: "6:53",
-        views: "430 mil",
-        image: "https://img.youtube.com/vi/1pbaugNB3Z4/hqdefault.jpg",
-        youtube: "https://youtu.be/1pbaugNB3Z4?si=Q9TrIe8dtGZ1X2u",
-        videoId: "1pbaugNB3Z4"
-    }
+  {
+    id: 1,
+    title: "Transmissão esportiva ao vivo",
+    description: "Vídeo esportivo disponível no YouTube.",
+    sport: "futebol",
+    category: "Futebol",
+    thumbnail: "https://img.youtube.com/vi/n2KWc_xbPAA/hqdefault.jpg",
+    videoId: "n2KWc_xbPAA",
+    url: "https://www.youtube.com/live/n2KWc_xbPAA?is=EVz2QP3yvkbx4kyz"
+  }
 ];
 
-let favorites = loadList("sportvision-favorites");
-let history = loadList("sportvision-history");
+// =========================================
+// 2. ELEMENTOS DO HTML
+// =========================================
 
-let currentPage = "inicio";
-let currentSport = "";
-let searchTerm = "";
-
-const grid = document.getElementById("video-grid");
-const title = document.getElementById("videos-title");
-const count = document.getElementById("video-count");
+const videoGrid = document.getElementById("video-grid");
+const searchInput = document.getElementById("search");
+const videosTitle = document.getElementById("videos-title");
+const videoCount = document.getElementById("video-count");
 const emptyMessage = document.getElementById("empty-message");
 
-function saveData() {
-    localStorage.setItem(
-        "sportvision-favorites",
-        JSON.stringify(favorites)
-    );
+const videoDialog = document.getElementById("video-dialog");
+const dialogTitle = document.getElementById("dialog-title");
+const dialogDescription = document.getElementById("dialog-description");
+const playerContainer = document.getElementById("player-container");
+const youtubeLink = document.getElementById("youtube-link");
+const closeDialog = document.getElementById("close-dialog");
 
-    localStorage.setItem(
-        "sportvision-history",
-        JSON.stringify(history)
-    );
+const profileDialog = document.getElementById("profile-dialog");
+const profileButton = document.getElementById("profile");
+const closeProfile = document.getElementById("close-profile");
+const clearHistoryButton = document.getElementById("clear-history");
+
+const mobileMenu = document.getElementById("mobile-menu");
+const sidebar = document.querySelector(".sidebar");
+
+// =========================================
+// 3. DADOS E CONFIGURAÇÕES
+// =========================================
+
+let currentSport = "todos";
+let currentPage = "inicio";
+let currentSearch = "";
+
+let favorites = JSON.parse(
+  localStorage.getItem("sportvision-favorites") || "[]"
+);
+
+let history = JSON.parse(
+  localStorage.getItem("sportvision-history") || "[]"
+);
+
+// =========================================
+// 4. SALVAR DADOS
+// =========================================
+
+function saveFavorites() {
+  localStorage.setItem(
+    "sportvision-favorites",
+    JSON.stringify(favorites)
+  );
 }
 
-function getVisibleVideos() {
-    let result = [...videos];
-
-    if (currentPage === "favoritos") {
-        result = result.filter(video => favorites.includes(video.id));
-    }
-
-    if (currentPage === "historico") {
-        result = history
-            .map(id => videos.find(video => video.id === id))
-            .filter(Boolean);
-    }
-
-    if (currentPage === "explorar") {
-        result.reverse();
-    }
-
-    if (currentSport) {
-        result = result.filter(video => video.sport === currentSport);
-    }
-
-    if (searchTerm) {
-        result = result.filter(video => {
-            const text = (
-                video.title + " " + video.sport
-            ).toLocaleLowerCase("pt-BR");
-
-            return text.includes(searchTerm);
-        });
-    }
-
-    return result;
+function saveHistory() {
+  localStorage.setItem(
+    "sportvision-history",
+    JSON.stringify(history)
+  );
 }
+
+// =========================================
+// 5. ORGANIZAR OS VÍDEOS
+// =========================================
+
+function getFilteredVideos() {
+  let result = [...videos];
+
+  // Filtrar por categoria esportiva
+  if (currentSport !== "todos") {
+    result = result.filter(
+      video => video.sport === currentSport
+    );
+  }
+
+  // Filtrar por pesquisa
+  if (currentSearch.trim() !== "") {
+    const search = currentSearch.toLowerCase();
+
+    result = result.filter(video =>
+      video.title.toLowerCase().includes(search) ||
+      video.description.toLowerCase().includes(search) ||
+      video.category.toLowerCase().includes(search)
+    );
+  }
+
+  // Filtrar por página
+  if (currentPage === "favoritos") {
+    result = result.filter(
+      video => favorites.includes(video.id)
+    );
+  }
+
+  if (currentPage === "historico") {
+    result = result.filter(
+      video => history.includes(video.id)
+    );
+  }
+
+  return result;
+}
+
+// =========================================
+// 6. CRIAR OS CARDS DOS VÍDEOS
+// =========================================
 
 function renderVideos() {
-    const visibleVideos = getVisibleVideos();
+  if (!videoGrid) return;
 
-    const titles = {
-        inicio: "Vídeos em alta",
-        explorar: "Explorar esportes",
-        favoritos: "Seus favoritos",
-        historico: "Vídeos assistidos"
-    };
+  const filteredVideos = getFilteredVideos();
 
-    title.textContent = currentSport
-        ? `Vídeos de ${currentSport}`
-        : titles[currentPage] || "Vídeos em alta";
+  videoGrid.innerHTML = "";
 
-    count.textContent = `${visibleVideos.length} vídeos`;
+  if (videoCount) {
+    videoCount.textContent = filteredVideos.length;
+  }
 
-    emptyMessage.hidden = visibleVideos.length !== 0;
+  if (emptyMessage) {
+    emptyMessage.style.display =
+      filteredVideos.length === 0 ? "block" : "none";
+  }
 
-    grid.replaceChildren();
+  filteredVideos.forEach(video => {
+    const isFavorite = favorites.includes(video.id);
 
-    visibleVideos.forEach(video => {
-        const card = document.createElement("article");
-        card.className = "video-card";
+    const card = document.createElement("article");
+    card.className = "video-card";
 
-        const thumbnail = document.createElement("div");
-        thumbnail.className = "thumbnail";
-        thumbnail.tabIndex = 0;
-        thumbnail.setAttribute("role", "button");
-        thumbnail.setAttribute("aria-label", `Assistir ${video.title}`);
+    card.innerHTML = `
+      <div class="video-thumbnail">
+        <img
+          src="${video.thumbnail}"
+          alt="${video.title}"
+          loading="lazy"
+        >
 
-        const img = document.createElement("img");
-        img.src = video.image;
-        img.alt = video.title;
-        img.loading = "lazy";
+        <button
+          class="favorite-btn ${isFavorite ? "active" : ""}"
+          data-favorite="${video.id}"
+          aria-label="Adicionar aos favoritos"
+        >
+          ${isFavorite ? "★" : "☆"}
+        </button>
 
-        const duration = document.createElement("span");
-        duration.className = "duration";
-        duration.textContent = video.duration;
+        <span class="video-category">
+          ${video.category}
+        </span>
+      </div>
 
-        thumbnail.append(img, duration);
+      <div class="video-info">
+        <h3>${video.title}</h3>
+        <p>${video.description}</p>
 
-        thumbnail.addEventListener("click", () => openVideo(video.id));
-        thumbnail.addEventListener("keydown", event => {
-            if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                openVideo(video.id);
-            }
-        });
+        <button
+          class="watch-btn"
+          data-watch="${video.id}"
+        >
+          Assistir vídeo
+        </button>
+      </div>
+    `;
 
-        const info = document.createElement("div");
-        info.className = "video-info";
+    videoGrid.appendChild(card);
+  });
 
-        const text = document.createElement("div");
-        text.className = "video-text";
-
-        const videoTitle = document.createElement("p");
-        videoTitle.className = "video-title";
-        videoTitle.textContent = video.title;
-
-        const meta = document.createElement("p");
-        meta.className = "video-meta";
-        meta.textContent = `${video.sport} • ${video.views} visualizações`;
-
-        text.append(videoTitle, meta);
-
-        const actions = document.createElement("div");
-        actions.className = "video-actions";
-
-        const favoriteButton = document.createElement("button");
-        favoriteButton.className = "icon-btn";
-        favoriteButton.classList.toggle(
-            "favorite",
-            favorites.includes(video.id)
-        );
-
-        favoriteButton.textContent =
-            favorites.includes(video.id) ? "♥" : "♡";
-
-        favoriteButton.title = "Adicionar ou remover dos favoritos";
-        favoriteButton.setAttribute(
-            "aria-label",
-            `Favoritar ${video.title}`
-        );
-
-        favoriteButton.addEventListener("click", () => {
-            toggleFavorite(video.id);
-        });
-
-        actions.append(favoriteButton);
-        info.append(text, actions);
-        card.append(thumbnail, info);
-        grid.append(card);
-    });
-}
-
-function toggleFavorite(id) {
-    if (favorites.includes(id)) {
-        favorites = favorites.filter(item => item !== id);
-    } else {
-        favorites.unshift(id);
-    }
-
-    saveData();
-    renderVideos();
-}
-
-function openVideo(id) {
-    const video = videos.find(item => item.id === id);
-    if (!video) return;
-
-    history = [
-        id,
-        ...history.filter(item => item !== id)
-    ].slice(0, 50);
-
-    saveData();
-    renderVideos();
-
-    document.getElementById("dialog-title").textContent = video.title;
-    document.getElementById("dialog-description").textContent =
-        `Modalidade: ${video.sport} • ${video.views} visualizações`;
-
-    document.getElementById("youtube-link").href = video.youtube;
-
-    const player = document.getElementById("player-container");
-    player.replaceChildren();
-
-    // Vídeos incorporados dependem de IDs válidos e permissão
-    // do canal. Se o vídeo não puder ser incorporado, use o link.
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube-nocookie.com/embed/${video.videoId}`;
-    iframe.title = video.title;
-    iframe.allow =
-        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-    iframe.allowFullscreen = true;
-    iframe.referrerPolicy = "strict-origin-when-cross-origin";
-
-    player.append(iframe);
-
-    document.getElementById("video-dialog").showModal();
-}
-
-function selectPage(page) {
-    currentPage = page;
-    currentSport = "";
-
-    document.querySelectorAll(".nav-btn").forEach(button => {
-        button.classList.toggle(
-            "active",
-            button.dataset.page === page
-        );
-    });
-
-    renderVideos();
-}
-
-function selectSport(sport) {
-    currentPage = "explorar";
-    currentSport = sport;
-
-    document.querySelectorAll(".nav-btn").forEach(button => {
-        button.classList.toggle(
-            "active",
-            button.dataset.sport === sport
-        );
-    });
-
-    renderVideos();
-}
-
-document.querySelectorAll("[data-page]").forEach(button => {
+  // Eventos dos botões dos cards
+  videoGrid.querySelectorAll("[data-watch]").forEach(button => {
     button.addEventListener("click", () => {
-        selectPage(button.dataset.page);
+      openVideo(Number(button.dataset.watch));
     });
-});
+  });
+
+  videoGrid.querySelectorAll("[data-favorite]").forEach(button => {
+    button.addEventListener("click", () => {
+      toggleFavorite(Number(button.dataset.favorite));
+    });
+  });
+}
+
+// =========================================
+// 7. ABRIR E REPRODUZIR VÍDEO
+// =========================================
+
+function openVideo(videoId) {
+  const video = videos.find(item => item.id === videoId);
+
+  if (!video) return;
+
+  if (dialogTitle) {
+    dialogTitle.textContent = video.title;
+  }
+
+  if (dialogDescription) {
+    dialogDescription.textContent = video.description;
+  }
+
+  if (playerContainer) {
+    playerContainer.innerHTML = `
+      <iframe
+        src="https://www.youtube.com/embed/${video.videoId}?autoplay=1"
+        title="${video.title}"
+        width="100%"
+        height="100%"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    `;
+  }
+
+  if (youtubeLink) {
+    youtubeLink.href = video.url;
+    youtubeLink.target = "_blank";
+    youtubeLink.rel = "noopener noreferrer";
+  }
+
+  // Adicionar ao histórico
+  history = [
+    video.id,
+    ...history.filter(id => id !== video.id)
+  ];
+
+  saveHistory();
+
+  if (videoDialog) {
+    videoDialog.showModal();
+  }
+}
+
+// =========================================
+// 8. FECHAR PLAYER
+// =========================================
+
+function closeVideo() {
+  if (videoDialog) {
+    videoDialog.close();
+  }
+
+  if (playerContainer) {
+    playerContainer.innerHTML = "";
+  }
+}
+
+if (closeDialog) {
+  closeDialog.addEventListener("click", closeVideo);
+}
+
+if (videoDialog) {
+  videoDialog.addEventListener("click", event => {
+    if (event.target === videoDialog) {
+      closeVideo();
+    }
+  });
+}
+
+// =========================================
+// 9. FAVORITOS
+// =========================================
+
+function toggleFavorite(videoId) {
+  if (favorites.includes(videoId)) {
+    favorites = favorites.filter(id => id !== videoId);
+  } else {
+    favorites.push(videoId);
+  }
+
+  saveFavorites();
+  renderVideos();
+}
+
+// =========================================
+// 10. PESQUISA
+// =========================================
+
+if (searchInput) {
+  searchInput.addEventListener("input", event => {
+    currentSearch = event.target.value;
+    renderVideos();
+  });
+}
+
+// =========================================
+// 11. FILTROS POR MODALIDADE
+// =========================================
 
 document.querySelectorAll("[data-sport]").forEach(button => {
-    button.addEventListener("click", () => {
-        selectSport(button.dataset.sport);
-    });
-});
+  button.addEventListener("click", () => {
+    currentSport = button.dataset.sport;
 
-document.getElementById("search").addEventListener("input", event => {
-    searchTerm = event.target.value
-        .trim()
-        .toLocaleLowerCase("pt-BR");
+    document.querySelectorAll("[data-sport]").forEach(item => {
+      item.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    if (videosTitle) {
+      videosTitle.textContent =
+        currentSport === "todos"
+          ? "Todos os vídeos"
+          : button.textContent.trim();
+    }
 
     renderVideos();
+  });
 });
 
-document.getElementById("all-categories").addEventListener("click", () => {
-    selectPage("explorar");
-    document.getElementById("categories-section").scrollIntoView({
-        behavior: "smooth"
+// =========================================
+// 12. NAVEGAÇÃO ENTRE PÁGINAS
+// =========================================
+
+document.querySelectorAll("[data-page]").forEach(button => {
+  button.addEventListener("click", () => {
+    currentPage = button.dataset.page;
+
+    document.querySelectorAll("[data-page]").forEach(item => {
+      item.classList.remove("active");
     });
+
+    button.classList.add("active");
+
+    if (videosTitle) {
+      const titles = {
+        inicio: "Todos os vídeos",
+        favoritos: "Meus favoritos",
+        historico: "Histórico"
+      };
+
+      videosTitle.textContent =
+        titles[currentPage] || button.textContent.trim();
+    }
+
+    renderVideos();
+
+    if (sidebar) {
+      sidebar.classList.remove("open");
+    }
+  });
 });
 
-document.getElementById("watch-featured").addEventListener("click", () => {
+// =========================================
+// 13. BOTÃO TODOS OS VÍDEOS
+// =========================================
+
+const allCategories = document.getElementById("all-categories");
+
+if (allCategories) {
+  allCategories.addEventListener("click", () => {
+    currentSport = "todos";
+    currentPage = "inicio";
+    currentSearch = "";
+
+    if (searchInput) {
+      searchInput.value = "";
+    }
+
+    renderVideos();
+  });
+}
+
+// =========================================
+// 14. VÍDEO EM DESTAQUE
+// =========================================
+
+const watchFeatured = document.getElementById("watch-featured");
+
+if (watchFeatured) {
+  watchFeatured.addEventListener("click", () => {
     openVideo(1);
-});
+  });
+}
 
-document.getElementById("see-highlights").addEventListener("click", () => {
-    selectPage("explorar");
-    document.querySelector(".section").scrollIntoView({
-        behavior: "smooth"
-    });
-});
+// =========================================
+// 15. VER DESTAQUES
+// =========================================
 
-document.getElementById("mobile-menu").addEventListener("click", () => {
-    document.querySelector(".sidebar").classList.toggle("open");
-});
+const seeHighlights = document.getElementById("see-highlights");
 
-document.getElementById("close-dialog").addEventListener("click", () => {
-    document.getElementById("video-dialog").close();
-});
-
-document.getElementById("video-dialog").addEventListener("close", () => {
-    document.getElementById("player-container").replaceChildren();
-});
-
-document.getElementById("profile").addEventListener("click", () => {
-    document.getElementById("profile-dialog").showModal();
-});
-
-document.getElementById("close-profile").addEventListener("click", () => {
-    document.getElementById("profile-dialog").close();
-});
-
-document.getElementById("clear-history").addEventListener("click", () => {
-    history = [];
-    saveData();
+if (seeHighlights) {
+  seeHighlights.addEventListener("click", () => {
+    currentSport = "todos";
+    currentPage = "inicio";
     renderVideos();
-    document.getElementById("profile-dialog").close();
+
+    if (videosTitle) {
+      videosTitle.textContent = "Vídeos em destaque";
+    }
+  });
+}
+
+// =========================================
+// 16. PERFIL DO USUÁRIO
+// =========================================
+
+if (profileButton && profileDialog) {
+  profileButton.addEventListener("click", () => {
+    profileDialog.showModal();
+  });
+}
+
+if (closeProfile) {
+  closeProfile.addEventListener("click", () => {
+    profileDialog.close();
+  });
+}
+
+// =========================================
+// 17. LIMPAR HISTÓRICO
+// =========================================
+
+if (clearHistoryButton) {
+  clearHistoryButton.addEventListener("click", () => {
+    history = [];
+    saveHistory();
+    renderVideos();
+  });
+}
+
+// =========================================
+// 18. MENU PARA CELULAR
+// =========================================
+
+if (mobileMenu && sidebar) {
+  mobileMenu.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+  });
+}
+
+// =========================================
+// 19. INICIALIZAÇÃO DO SITE
+// =========================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderVideos();
 });
 
-// Inicia o site.
 renderVideos();
