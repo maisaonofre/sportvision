@@ -5,9 +5,9 @@ const videos = [
         sport: "Futebol",
         duration: "8:24",
         views: "2,3 mi",
-        image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://www.youtube.com/results?search_query=melhores+momentos+futebol",
-        videoId: "kJQP7kiw5Fk"
+        image: "https://img.youtube.com/vi/15jB450S3HY/hqdefault.jpg",
+        youtube: "https://youtu.be/15jB450S3HY",
+        videoId: "15jB450S3HY"
     },
     {
         id: 2,
@@ -15,9 +15,9 @@ const videos = [
         sport: "Basquete",
         duration: "10:12",
         views: "1,8 mi",
-        image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://www.youtube.com/results?search_query=melhores+jogadas+basquete",
-        videoId: "aqz-KE-bpKQ"
+        image: "https://img.youtube.com/vi/sQQSpsYtjVw/hqdefault.jpg",
+        youtube: "https://youtu.be/sQQSpsYtjVw",
+        videoId: "sQQSpsYtjVw"
     },
     {
         id: 3,
@@ -25,9 +25,9 @@ const videos = [
         sport: "Vôlei",
         duration: "9:45",
         views: "1,2 mi",
-        image: "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://www.youtube.com/results?search_query=melhores+jogadas+volei",
-        videoId: "ScMzIvxBSi4"
+        image: "https://img.youtube.com/vi/rOSyIi0f0NQ/hqdefault.jpg",
+        youtube: "https://youtu.be/rOSyIi0f0NQ",
+        videoId: "rOSyIi0f0NQ"
     },
     {
         id: 4,
@@ -35,9 +35,9 @@ const videos = [
         sport: "Tênis",
         duration: "7:36",
         views: "980 mil",
-        image: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://www.youtube.com/results?search_query=melhores+pontos+tenis",
-        videoId: "ysz5S6PUM-U"
+        image: "https://img.youtube.com/vi/RVt74h24JBw/hqdefault.jpg",
+        youtube: "https://www.youtube.com/live/RVt74h24JBw",
+        videoId: "RVt74h24JBw"
     },
     {
         id: 5,
@@ -45,9 +45,9 @@ const videos = [
         sport: "Corrida",
         duration: "6:42",
         views: "750 mil",
-        image: "https://images.unsplash.com/photo-1533561052604-c3beb6d55b8d?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://www.youtube.com/results?search_query=melhores+momentos+atletismo",
-        videoId: "ScMzIvxBSi4"
+        image: "https://img.youtube.com/vi/aQ_ZE7ogHOY/hqdefault.jpg",
+        youtube: "https://youtu.be/aQ_ZE7ogHOY",
+        videoId: "aQ_ZE7ogHOY"
     },
     {
         id: 6,
@@ -55,9 +55,9 @@ const videos = [
         sport: "Futebol",
         duration: "5:28",
         views: "640 mil",
-        image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://www.youtube.com/results?search_query=gols+incriveis+futebol",
-        videoId: "kJQP7kiw5Fk"
+        image: "https://img.youtube.com/vi/YiWjCKWBWog/hqdefault.jpg",
+        youtube: "https://youtu.be/YiWjCKWBWog",
+        videoId: "YiWjCKWBWog"
     },
     {
         id: 7,
@@ -65,9 +65,9 @@ const videos = [
         sport: "Basquete",
         duration: "8:16",
         views: "510 mil",
-        image: "https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://www.youtube.com/results?search_query=enterradas+nba",
-        videoId: "aqz-KE-bpKQ"
+        image: "https://img.youtube.com/vi/Nleku8x8CfM/hqdefault.jpg",
+        youtube: "https://youtu.be/Nleku8x8CfM",
+        videoId: "Nleku8x8CfM"
     },
     {
         id: 8,
@@ -75,9 +75,9 @@ const videos = [
         sport: "Vôlei",
         duration: "6:53",
         views: "430 mil",
-        image: "https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=800&q=80",
-        youtube: "https://www.youtube.com/results?search_query=melhores+ralis+volei",
-        videoId: "ScMzIvxBSi4"
+        image: "https://img.youtube.com/vi/TTTr3cDZO3M/hqdefault.jpg",
+        youtube: "https://youtu.be/TTTr3cDZO3M",
+        videoId: "TTTr3cDZO3M"
     }
 ];
 
