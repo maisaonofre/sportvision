@@ -1,7 +1,7 @@
 const videos = [
     {
         id: 1,
-        title: "Melhores momentos do futebol mundial",
+        title: "Melhores momentos do futebol mundial ",
         sport: "Futebol",
         duration: "8:24",
         views: "2,3 mi",
